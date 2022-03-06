@@ -5,7 +5,7 @@ import time
 import matplotlib.pyplot as plt
 
 
-eeg_data, headers = EEGReader.read_openbci_txt(file = "./experiments/music/data/OpenBCI-RAW-2022-02-22_16-50-25.txt")
+eeg_data, headers = EEGReader.read_openbci_txt(file = "./experiments/music/data/OpenBCI-RAW-2022-02-22_16-32-42.txt")
 print(headers)
 eeg_channels_only = eeg_data.iloc[:, 1:17].to_numpy().T
 
@@ -24,6 +24,7 @@ average_signal = np.average(eeg_data, axis=0)
 resampled = Audio.resample(average_signal, headers['sampling_rate'])
 print("mean amplitude: {}",np.mean(resampled))
 resampled = Audio.scale_eeg_to_pcm_amp(resampled)
+resampled = Audio.filter_savitzky_golay(resampled, window_size=500, order=2)
 print("mean amplitude: {}",np.mean(resampled))
 print("shape: {}",resampled.shape)
 

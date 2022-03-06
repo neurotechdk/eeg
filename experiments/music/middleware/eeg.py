@@ -63,7 +63,6 @@ class Filtering(object):
   def butterworth_lowpass(self, data: NDArray[Float64], cutoff = 49.0) -> NDArray[Float64]:
     for _, channel in enumerate(self.exg_channels):
       # DataFilter.detrend(data[channel], DetrendOperations.CONSTANT.value)
-      print(channel)
       DataFilter.perform_lowpass(data[channel], self.sampling_rate, cutoff, 1,
           FilterTypes.BUTTERWORTH.value, 0)
     return data
