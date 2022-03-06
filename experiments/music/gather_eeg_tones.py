@@ -1,4 +1,3 @@
-import OpenSync
 import time
 import datetime
 import os
@@ -38,6 +37,8 @@ participant_id = display_participant_dialogue()
 
 xrunner = Psypy(conf = PREFS)
 
+#xrunner.
+
 
 # gonna go out on a limb here before even testing
 # and assume int markers are faster than string markers
@@ -46,22 +47,17 @@ STATUS_MARKER = "plaback_status" # this is required to be a string
 STATUS_PLAYING = 1
 STATUS_STOPPED = 2
 
+from middleware.eeg import EEG
 
-print(OpenSync.OpenSync_path())
-
-playStatusMarker = OpenSync.markers.marker(STATUS_MARKER)
-
-EEG = OpenSync.sensors.EEG()
-EEG.OpenBCI_Cyton(daisy=True, port="COM3")
-
-OpenSync.record_data("{}session_{}.xdf".format(
-  DATA_DIR,
-  datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")))
-
-time.sleep(5)
+streamer = None
+try:
+  streamer = EEG(dummyBoard=False)
+except BaseException as e:
+  print("Error: Could not initialize EEG streamer")
+  print(e)
+finally:
+  if streamer is not None:
+    streamer.stop()
 
 
-# playStatusMarker.stream_marker(STATUS_PLAYING)
 
-
-OpenSync.stop_record()

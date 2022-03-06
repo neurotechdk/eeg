@@ -133,6 +133,7 @@ dependencies:
   - pyqt-impl=5.12.3=py39h415ef7b_8
   - pyqt5-sip=4.19.18=py39h415ef7b_8
   - pyqtchart=5.12=py39h415ef7b_8
+  - pyqtgraph=0.12.4=pyhd8ed1ab_0
   - pyqtwebengine=5.12.1=py39h415ef7b_8
   - pyserial=3.5=pyhd8ed1ab_0
   - pysocks=1.7.1=py39hcbf5309_4
@@ -192,8 +193,10 @@ dependencies:
   - zope.interface=5.4.0=py39hb82d6ee_1
   - zstd=1.5.2=h6255e5f_0
   - pip:
+    - brainflow==4.9.0
     - mindwavelsl==1.1.0
-    - opensync==0.2.2
+    - nptyping==1.4.4
     - pylsl==1.15.0
     - pyopenbci==0.13
+    - typish==1.9.3
     - xmltodict==0.12.0
